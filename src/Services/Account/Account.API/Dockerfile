@@ -14,14 +14,14 @@ COPY ["src/BuildingBlocks/EventBus.Messages/EventBus.Messages.csproj", "src/Buil
 COPY ["src/Services/Account/Account.Application/Account.Application.csproj", "src/Services/Account/Account.Application/"]
 COPY ["src/Services/Account/Account.Domain/Account.Domain.csproj", "src/Services/Account/Account.Domain/"]
 COPY ["src/Services/Account/Account.Infrastructure/Account.Infrastructure.csproj", "src/Services/Account/Account.Infrastructure/"]
-RUN dotnet restore ".src/Services/Account/Account.API/Account.API.csproj"
+RUN dotnet restore "src/Services/Account/Account.API/Account.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Account/Account.API"
-RUN dotnet build "./Account.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Account.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Account.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Account.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
