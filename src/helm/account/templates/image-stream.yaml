@@ -1,0 +1,16 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: {{ .Release.Name }}-image-stream
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: latest
+      from:
+        kind: DockerImage
+        name: "image-registry.openshift-image-registry.svc:5000/{{ .Values.namespace }}/{{ .Chart.Name }}:latest"
+      importPolicy:
+        scheduled: true
