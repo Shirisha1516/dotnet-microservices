@@ -16,7 +16,7 @@ COPY ["src/Services/Account/Account.Domain/Account.Domain.csproj", "src/Services
 COPY ["src/Services/Account/Account.Infrastructure/Account.Infrastructure.csproj", "src/Services/Account/Account.Infrastructure/"]
 RUN dotnet restore "src/Services/Account/Account.API/Account.API.csproj"
 COPY . .
-WORKDIR "/src/Services/Account/Account.API"
+WORKDIR "/src/src/Services/Account/Account.API"
 RUN dotnet build "Account.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
